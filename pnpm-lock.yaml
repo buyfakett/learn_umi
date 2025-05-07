@@ -27,6 +27,9 @@ importers:
       '@types/react-dom':
         specifier: ^18.0.11
         version: 18.3.7(@types/react@18.3.21)
+      '@umijs/mako':
+        specifier: ^0.11.10
+        version: 0.11.10(postcss@8.5.3)(typescript@5.8.3)(webpack@5.99.8)
       husky:
         specifier: ^9
         version: 9.1.7
