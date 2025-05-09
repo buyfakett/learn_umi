@@ -13,3 +13,4 @@
 .swc
 .idea
 pnpm-lock.yaml
+url.config.ts

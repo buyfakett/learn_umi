@@ -1,9 +1,28 @@
 import { LockOutlined, UserOutlined, } from '@ant-design/icons';
 import { LoginForm, ProConfigProvider, ProFormCheckbox, ProFormText } from '@ant-design/pro-components';
-import { theme } from 'antd';
+import { theme, message } from 'antd';
+import { history } from '@umijs/max';
+import { login } from '@/services/user';
 
 export default () => {
   const {token} = theme.useToken();
+
+  const handleSubmit = async (values: any) => {
+    try {
+      const res = await login(values);
+      if (res.code === 200) {
+        // 保存 token 到 localStorage
+        localStorage.setItem('token', res.data.token);
+        message.success('登录成功');
+        // 跳转到首页
+        history.push('/home');
+      } else {
+        message.error(res.message || '登录失败');
+      }
+    } catch (error) {
+      message.error('登录失败，请重试');
+    }
+  };
 
   return (
     <div className="flex min-h-screen items-center justify-center">
@@ -13,6 +32,7 @@ export default () => {
             logo="https://img.tteam.icu/i/2024/10/22/xhykcg-3.webp"
             title="hertz"
             subTitle="请登录"
+            onFinish={handleSubmit}
           >
             <ProFormText
               name="username"
@@ -78,7 +98,7 @@ export default () => {
                 marginBlockEnd: 24,
               }}
             >
-              <ProFormCheckbox noStyle name="autoLogin">
+              <ProFormCheckbox noStyle name="remember_me">
                 记住我
               </ProFormCheckbox>
             </div>
