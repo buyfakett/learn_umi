@@ -15,7 +15,7 @@ interface LoginResult {
 }
 
 export async function login(params: LoginParams) {
-  return request<LoginResult>('/user/login', {
+  return request<LoginResult>('/api/user/login', {
     method: 'POST',
     data: params,
   });
