@@ -2,7 +2,8 @@ import { LockOutlined, UserOutlined, } from '@ant-design/icons';
 import { LoginForm, ProConfigProvider, ProFormCheckbox, ProFormText } from '@ant-design/pro-components';
 import { theme, message } from 'antd';
 import { history } from '@umijs/max';
-import { login } from '@/services/user';
+import { login } from '@/api/user';
+import { setToken } from '@/utils/auth';
 
 export default () => {
   const {token} = theme.useToken();
@@ -11,8 +12,7 @@ export default () => {
     try {
       const res = await login(values);
       if (res.code === 200) {
-        // 保存 token 到 localStorage
-        localStorage.setItem('token', res.data.token);
+        setToken(res.data.token);
         message.success('登录成功');
         // 跳转到首页
         history.push('/home');
