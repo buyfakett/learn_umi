@@ -8,21 +8,15 @@ interface LoginParams {
 
 interface LoginResult {
   code: number;
-  data: {
+  msg: string;
+  data?: {
     token: string;
   };
-  message: string;
 }
 
 export async function login(params: LoginParams) {
   return request<LoginResult>('/user/login', {
     method: 'POST',
     data: params,
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    },
-    requestType: 'json',
-    getResponse: true,
   });
-} 
+}

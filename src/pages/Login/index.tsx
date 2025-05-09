@@ -9,16 +9,21 @@ export default () => {
 
   const handleSubmit = async (values: any) => {
     try {
-      const res = await login(values);
-      if (res.code === 200) {
-        // 保存 token 到 localStorage
-        localStorage.setItem('token', res.data.token);
-        message.success('登录成功');
-        // 跳转到首页
-        history.push('/home');
-      } else {
-        message.error(res.message || '登录失败');
-      }
+        const res = await login(values);
+        console.log('登录响应:', res); // 添加响应日志
+        console.log(res.code);
+        if (res.code === 200) {
+          // 添加可选链操作和空值检查
+          if (res.data?.token) {
+            localStorage.setItem('token', res.data.token);
+            message.success('登录成功');
+            history.push('/home');
+          } else {
+            message.error('登录凭证缺失');
+          }
+        } else {
+          message.error(res.msg || `登录失败，错误码：${res.code}`);
+        }
     } catch (error) {
       message.error('登录失败，请重试');
     }

@@ -23,7 +23,7 @@ export default defineConfig({
     '/api': {
       target: ENV_url,
       changeOrigin: true,
-      pathRewrite: { '^/api': '' },
+      // pathRewrite: { '^/api': '' },
     },
   },
   layout: {
