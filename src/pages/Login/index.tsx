@@ -2,7 +2,8 @@ import { LockOutlined, UserOutlined, } from '@ant-design/icons';
 import { LoginForm, ProConfigProvider, ProFormCheckbox, ProFormText } from '@ant-design/pro-components';
 import { theme, message } from 'antd';
 import { history } from '@umijs/max';
-import { login } from '@/services/user';
+import { login } from '@/api/user';
+import { setToken } from '@/utils/token';
 
 export default () => {
   const {token} = theme.useToken();
@@ -15,7 +16,7 @@ export default () => {
         if (res.code === 200) {
           // 添加可选链操作和空值检查
           if (res.data?.token) {
-            localStorage.setItem('token', res.data.token);
+            setToken(res.data.token);
             message.success('登录成功');
             history.push('/home');
           } else {
