@@ -1,6 +1,7 @@
-import { getToken } from '@/utils/auth';
+import { getToken, removeToken } from '@/utils/auth';
 import { RequestConfig, history } from '@umijs/max';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { Button, message } from 'antd';
 
 // 运行时配置
 
@@ -44,6 +45,19 @@ export const layout = () => {
     menu: {
       locale: false,
     },
+    rightContentRender: () => (
+      <Button
+        type="link"
+        danger
+        onClick={() => {
+          removeToken();
+          message.success("退出登录成功")
+          history.push('/');
+        }}
+      >
+        退出登录
+      </Button>
+    ),
   };
 };
 

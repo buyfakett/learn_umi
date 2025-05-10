@@ -3,7 +3,7 @@ import { LoginForm, ProConfigProvider, ProFormCheckbox, ProFormText } from '@ant
 import { theme, message } from 'antd';
 import { history } from '@umijs/max';
 import { login } from '@/api/user';
-import { setToken } from '@/utils/token';
+import { setToken } from '@/utils/auth';
 
 export default () => {
   const {token} = theme.useToken();
@@ -11,8 +11,6 @@ export default () => {
   const handleSubmit = async (values: any) => {
     try {
         const res = await login(values);
-        console.log('登录响应:', res); // 添加响应日志
-        console.log(res.code);
         if (res.code === 200) {
           // 添加可选链操作和空值检查
           if (res.data?.token) {
