@@ -1,7 +1,7 @@
 import { getToken, removeToken } from '@/utils/auth';
 import { RequestConfig, history } from '@umijs/max';
 import React, { useEffect } from 'react';
-import { Button, Dropdown, Menu, Space, message } from 'antd';
+import { Dropdown, Space, message } from 'antd';
 import type { MenuProps } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { getUsername } from '@/utils/auth';

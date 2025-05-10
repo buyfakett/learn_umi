@@ -34,12 +34,10 @@ function parseJwt(token: string): JwtPayload | null {
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
     const decodedPayload = JSON.parse(atob(base64));
 
-    const jwtPayload: JwtPayload = {
+    return {
       userid: decodedPayload.userid,
       username: decodedPayload.username,
     };
-
-    return jwtPayload;
   } catch (error) {
     console.error('Failed to parse JWT:', error);
     return null;
