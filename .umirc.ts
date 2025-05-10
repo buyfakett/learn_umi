@@ -27,7 +27,7 @@ export default defineConfig({
     },
   },
   layout: {
-    title: "@umijs/max",
+    title: "hertz",
   },
   routes: [
     {
