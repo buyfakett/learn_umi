@@ -1,7 +1,10 @@
 import { getToken, removeToken } from '@/utils/auth';
 import { RequestConfig, history } from '@umijs/max';
 import React, { useEffect } from 'react';
-import { Button, message } from 'antd';
+import { Button, Dropdown, Menu, Space, message } from 'antd';
+import type { MenuProps } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
+import { getUsername } from '@/utils/auth';
 
 // 运行时配置
 
@@ -45,19 +48,31 @@ export const layout = () => {
     menu: {
       locale: false,
     },
-    rightContentRender: () => (
-      <Button
-        type="link"
-        danger
-        onClick={() => {
-          removeToken();
-          message.success("退出登录成功")
-          history.push('/');
-        }}
-      >
-        退出登录
-      </Button>
-    ),
+    rightContentRender: () => {
+      const username = getUsername();
+      const items: MenuProps['items'] = [
+        {
+          key: 'logout',
+          label: (
+            <span onClick={() => {
+              removeToken();
+              message.success('退出登录成功');
+              history.push('/login');
+            }}>
+              退出登录
+            </span>
+          ),
+        },
+      ];
+      return (
+        <Dropdown menu={{ items }} placement="bottomRight">
+          <Space style={{ cursor: 'pointer', padding: '8px 16px' }}>
+            <UserOutlined />
+            <span>{username}</span>
+          </Space>
+        </Dropdown>
+      );
+    },
   };
 };
 
