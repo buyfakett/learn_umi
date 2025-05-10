@@ -78,6 +78,15 @@ export const layout = () => {
 
 // 请求拦截器配置
 export const request: RequestConfig = {
+  responseInterceptors: [
+    (response) => {
+      if (response.status === 401) {
+        removeToken();
+        history.replace('/login');
+      }
+      return response;
+    }
+  ],
   requestInterceptors: [
     (url, options) => {
       const token = getToken();
