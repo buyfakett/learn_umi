@@ -20,7 +20,7 @@ export default () => {
 
   const handleSubmit = async (values: any) => {
     try {
-      const res = await UserAPI.login(values);
+      const res = await UserAPI.Login(values);
       if (res.code === 200) {
         // 添加可选链操作和空值检查
         if (res.data?.token) {

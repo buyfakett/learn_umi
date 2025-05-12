@@ -1,5 +1,5 @@
 import { ProTable, ProColumns } from '@ant-design/pro-components';
-import { list } from '@/api/user/user';
+import { List } from '@/api/user/user';
 
 const UserCRUD = () => {
   const columns: ProColumns<API.UserInfo>[] = [
@@ -32,9 +32,9 @@ const UserCRUD = () => {
         columns={columns}
         request={async (params) => {
           const { current, pageSize } = params;
-          const response = await list({
-            page: current ? BigInt(current) : 1n,
-            page_size: pageSize ? BigInt(pageSize) : 10n,
+          const response = await List({
+            page: current ? current : 1,
+            page_size: pageSize ? pageSize : 10,
             username: params.username // 添加用户名搜索参数
           });
           

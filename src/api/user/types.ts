@@ -1,10 +1,15 @@
+export interface CommonResp {
+  code: number;
+  msg: string;
+}
+
 export interface LoginParams {
   username: string;
   password: string;
   remember_me?: boolean;
 }
 
-export interface LoginResult {
+export interface LoginResp {
   code: number;
   msg: string;
   data?: {
@@ -13,17 +18,17 @@ export interface LoginResult {
 }
 
 export interface UserListParams {
-  page: bigint;
-  page_size: bigint;
+  page: number;
+  page_size: number;
   username?: boolean;
 }
 
-export interface UserListResult {
+export interface UserListResp {
   code: number;
   msg: string;
-  total?: bigint;
+  total?: number;
   data?: [{
-    user_id: bigint;
+    user_id: number;
     username: string;
     email?: string;
   }];
