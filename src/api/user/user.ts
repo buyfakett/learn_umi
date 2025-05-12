@@ -1,19 +1,7 @@
 import { request } from '@umijs/max';
+import type { LoginParams, LoginResult } from './types';
 
-interface LoginParams {
-  username: string;
-  password: string;
-  remember_me?: boolean;
-}
-
-interface LoginResult {
-  code: number;
-  msg: string;
-  data?: {
-    token: string;
-  };
-}
-
+/** 用户登录 */
 export async function login(params: LoginParams) {
   return request<LoginResult>('/api/user/login', {
     method: 'POST',

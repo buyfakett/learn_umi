@@ -1,4 +1,4 @@
-import { login } from '@/api/user';
+import { UserAPI } from '@/api/user';
 import { setToken } from '@/utils/auth';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import {
@@ -20,7 +20,7 @@ export default () => {
 
   const handleSubmit = async (values: any) => {
     try {
-      const res = await login(values);
+      const res = await UserAPI.login(values);
       if (res.code === 200) {
         // 添加可选链操作和空值检查
         if (res.data?.token) {
