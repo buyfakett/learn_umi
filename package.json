@@ -15,6 +15,7 @@
     "@ant-design/pro-components": "^2.4.4",
     "@umijs/max": "^4.4.10",
     "antd": "^5.4.0",
+    "umi-request": "^1.4.0",
     "zustand": "^5.0.4"
   },
   "devDependencies": {

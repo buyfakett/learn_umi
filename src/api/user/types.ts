@@ -11,3 +11,20 @@ export interface LoginResult {
     token: string;
   };
 }
+
+export interface UserListParams {
+  page: bigint;
+  page_size: bigint;
+  username?: boolean;
+}
+
+export interface UserListResult {
+  code: number;
+  msg: string;
+  total?: bigint;
+  data?: [{
+    user_id: bigint;
+    username: string;
+    email?: string;
+  }];
+}
