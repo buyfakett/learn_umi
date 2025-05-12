@@ -1,10 +1,11 @@
-import { getToken, removeToken } from '@/utils/auth';
-import { RequestConfig, history } from '@umijs/max';
-import React, { useEffect } from 'react';
-import { Dropdown, Space, message } from 'antd';
-import type { MenuProps } from 'antd';
+import UpdateUserModal from '@/components/App/updateUser';
+import useUpdateUserStore from '@/stores/updateUserHandler';
+import { getToken, getUsername, removeToken } from '@/utils/auth';
 import { UserOutlined } from '@ant-design/icons';
-import { getUsername } from '@/utils/auth';
+import { RequestConfig, history } from '@umijs/max';
+import type { MenuProps } from 'antd';
+import { Dropdown, Space, message } from 'antd';
+import React, { useEffect } from 'react';
 
 // 运行时配置
 
@@ -48,29 +49,51 @@ export const layout = () => {
     menu: {
       locale: false,
     },
-    rightContentRender: () => {
+    rightContentRender: (props: { children?: React.ReactNode }) => {
       const username = getUsername();
+      const setUpdateUserHandler = useUpdateUserStore((state) => state.setOpen);
       const items: MenuProps['items'] = [
+        {
+          key: 'update_user',
+          label: (
+            <span
+              onClick={() => {
+                setUpdateUserHandler(true);
+              }}
+            >
+              修改用户信息
+            </span>
+          ),
+        },
         {
           key: 'logout',
           label: (
-            <span onClick={() => {
-              removeToken();
-              message.success('退出登录成功');
-              history.push('/login');
-            }}>
+            <span
+              onClick={() => {
+                removeToken();
+                message.success('退出登录成功');
+                history.push('/login');
+              }}
+            >
               退出登录
             </span>
           ),
         },
       ];
-      return (
+      const dropdown = (
         <Dropdown menu={{ items }} placement="bottomRight">
           <Space style={{ cursor: 'pointer', padding: '8px 16px' }}>
             <UserOutlined />
             <span>{username}</span>
           </Space>
         </Dropdown>
+      );
+
+      return (
+        <>
+          {dropdown}
+          <UpdateUserModal />
+        </>
       );
     },
   };
@@ -85,7 +108,7 @@ export const request: RequestConfig = {
         history.replace('/login');
       }
       return response;
-    }
+    },
   ],
   requestInterceptors: [
     (url, options) => {
