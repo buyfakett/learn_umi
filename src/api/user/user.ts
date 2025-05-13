@@ -1,5 +1,5 @@
 import { request } from '@umijs/max';
-import { LoginParams, LoginResp, UserListParams, UserListResp, CommonResp } from './types';
+import { LoginParams, LoginResp, UserListParams, UserListResp, DeleteUserParams, DeleteUserResp } from './types';
 import requestAuth from '@/utils/request';
 
 
@@ -20,8 +20,8 @@ export async function List(params: UserListParams) {
 }
 
 /** 用户列表 */
-export async function Delete(user_id: number) {
-  return requestAuth<CommonResp>('/api/user/delete/:user_id', {
+export async function Delete(params: DeleteUserParams) {
+  return requestAuth<DeleteUserResp>(`/api/user/delete/${params.user_id}`, {
     method: 'DELETE',
   });
 }
