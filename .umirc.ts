@@ -59,6 +59,7 @@ export default defineConfig({
       name: " 用户管理",
       path: "/user",
       component: "./UserCRUD",
+      access: "isAdmin",
     },
   ],
 

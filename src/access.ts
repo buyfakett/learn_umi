@@ -1,10 +1,16 @@
-export default (initialState: API.UserInfo) => {
-  // 在这里按照初始化数据定义项目中的权限，统一管理
-  // 参考文档 https://umijs.org/docs/max/access
-  const canSeeAdmin = !!(
-    initialState && initialState.name !== 'dontHaveAccess'
-  );
+import { getToken, parseJwt } from '@/utils/auth';
+
+export default () => {
+  const token: string | null = getToken();
+  let isAdmin: boolean = false;
+  if (!token) {
+    return;
+  } else {
+    const userid: string = parseJwt(token)?.userid ?? '';
+    isAdmin = userid === '1';
+  }
+
   return {
-    canSeeAdmin,
+    isAdmin,
   };
 };
