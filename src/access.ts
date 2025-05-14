@@ -4,13 +4,11 @@ export default () => {
   const token: string | null = getToken();
   let isAdmin: boolean = false;
   if (!token) {
-    return;
+    return isAdmin
   } else {
     const userid: string = parseJwt(token)?.userid ?? '';
     isAdmin = userid === '1';
   }
 
-  return {
-    isAdmin,
-  };
+  return isAdmin
 };

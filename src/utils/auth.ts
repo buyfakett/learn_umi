@@ -1,26 +1,24 @@
+import { authStore } from "@/stores/useAuthStore";
+
 // 设置 token
 export function setToken(token: string): void {
   const username: string = parseJwt(token)?.username ?? '';
-  const userid: string = parseJwt(token)?.userid ?? '';
-  localStorage.setItem('token', token);
-  localStorage.setItem('username', username);
-  localStorage.setItem('userid', userid);
+  authStore.setState({ token, username });
 }
 
-// 获取 token
+// 获取 token 
 export function getToken(): string | null {
-  return localStorage.getItem('token');
+  return authStore.getState().token;
 }
 
 // 获取 username
 export function getUsername(): string | null {
-  return localStorage.getItem('username');
+  return authStore.getState().username;
 }
 
 // 删除 token
 export function removeToken(): void {
-  localStorage.removeItem('token');
-  localStorage.removeItem('username');
+  authStore.setState({ token: null, username: null });
 }
 
 interface JwtPayload {
