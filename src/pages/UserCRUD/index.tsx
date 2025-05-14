@@ -65,27 +65,35 @@ const UserCRUD = () => {
 
   return (
     <div>
-      <h2 style={{ marginBottom: 24 }}>用户管理</h2>
+      <h2 className="mb-6">用户管理</h2>
 
-      <Row gutter={24} style={{ marginBottom: 16 }}>
-        <Col>
-          <Space>
-            <Input
-              placeholder="请输入用户名"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              allowClear
-              onPressEnter={() => actionRef.current?.reload()}
-            />
-            <Button onClick={(e) => setUsername('')}>重置</Button>
-            <Button
-              type="primary"
-              icon={<SearchOutlined />}
-              onClick={() => actionRef.current?.reload()}
-            >
-              查询
-            </Button>
-          </Space>
+      <Row gutter={24} className="mb-4 p-4 bg-white rounded shadow-sm">
+        <Col span={24}>
+          <div className="flex justify-between">
+            <Space>
+              用户名:
+              <Input
+                placeholder="请输入用户名"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                allowClear
+                onPressEnter={() => actionRef.current?.reload()}
+              />
+            </Space>
+            <Space>
+              <Button onClick={(e) => setUsername('')}>重置</Button>
+              <Button
+                type="primary"
+                icon={<SearchOutlined />}
+                onClick={() => actionRef.current?.reload()}
+              >
+                查询
+              </Button>
+              <Button type="primary" onClick={() => {}}>
+                新增
+              </Button>
+            </Space>
+          </div>
         </Col>
       </Row>
 
