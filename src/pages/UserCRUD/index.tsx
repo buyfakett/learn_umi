@@ -1,9 +1,9 @@
-import { ProTable, ProColumns, ActionType } from '@ant-design/pro-components';
-import { List, Delete } from '@/api/user/user';
-import { message, Popconfirm, Button, Input, Space, Row, Col } from 'antd';
-import { useRef, useState } from 'react';
 import { UserInfo } from '@/api/user/types';
+import { Delete, List } from '@/api/user/user';
 import { SearchOutlined } from '@ant-design/icons';
+import { ActionType, ProColumns, ProTable } from '@ant-design/pro-components';
+import { Button, Col, Input, message, Popconfirm, Row, Space } from 'antd';
+import { useRef, useState } from 'react';
 
 const UserCRUD = () => {
   const actionRef = useRef<ActionType>();
@@ -66,7 +66,7 @@ const UserCRUD = () => {
   return (
     <div>
       <h2 style={{ marginBottom: 24 }}>用户管理</h2>
-      
+
       <Row gutter={24} style={{ marginBottom: 16 }}>
         <Col>
           <Space>
@@ -77,8 +77,9 @@ const UserCRUD = () => {
               allowClear
               onPressEnter={() => actionRef.current?.reload()}
             />
-            <Button 
-              type="primary" 
+            <Button onClick={(e) => setUsername('')}>重置</Button>
+            <Button
+              type="primary"
               icon={<SearchOutlined />}
               onClick={() => actionRef.current?.reload()}
             >
@@ -87,7 +88,7 @@ const UserCRUD = () => {
           </Space>
         </Col>
       </Row>
-      
+
       <ProTable<UserInfo>
         actionRef={actionRef}
         columns={columns}
@@ -104,9 +105,9 @@ const UserCRUD = () => {
           }
 
           const response = await List(queryParams);
-          
+
           return {
-            data: (response?.data || []).map(item => ({
+            data: (response?.data || []).map((item) => ({
               ...item,
               user_id: Number(item.user_id),
             })),
