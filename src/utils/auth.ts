@@ -1,9 +1,10 @@
 // 设置 token
 export function setToken(token: string): void {
   const username: string = parseJwt(token)?.username ?? '';
-  console.log(username)
+  const userid: string = parseJwt(token)?.userid ?? '';
   localStorage.setItem('token', token);
   localStorage.setItem('username', username);
+  localStorage.setItem('userid', userid);
 }
 
 // 获取 token
