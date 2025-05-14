@@ -46,11 +46,6 @@ export default defineConfig({
       component: "./Home",
     },
     {
-      name: "权限演示",
-      path: "/access",
-      component: "./Access",
-    },
-    {
       name: " CRUD 示例",
       path: "/table",
       component: "./Table",
@@ -58,7 +53,7 @@ export default defineConfig({
     {
       name: " 用户管理",
       path: "/user",
-      component: "./UserCRUD",
+      component: "./User",
       access: "isAdmin",
     },
   ],
