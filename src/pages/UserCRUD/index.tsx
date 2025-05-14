@@ -8,6 +8,7 @@ import { useRef, useState } from 'react';
 const UserCRUD = () => {
   const actionRef = useRef<ActionType>();
   const [username, setUsername] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
 
   const columns: ProColumns<UserInfo>[] = [
     {
@@ -79,9 +80,16 @@ const UserCRUD = () => {
                 allowClear
                 onPressEnter={() => actionRef.current?.reload()}
               />
+              邮箱:
+              <Input
+                placeholder="请输入邮箱"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                allowClear
+                onPressEnter={() => actionRef.current?.reload()}
+              />
             </Space>
             <Space>
-              <Button onClick={(e) => setUsername('')}>重置</Button>
               <Button
                 type="primary"
                 icon={<SearchOutlined />}
@@ -89,8 +97,14 @@ const UserCRUD = () => {
               >
                 查询
               </Button>
-              <Button type="primary" onClick={() => {}}>
-                新增
+              <Button
+                onClick={() => {
+                  setUsername('');
+                  setEmail('');
+                  actionRef.current?.reload();
+                }}
+              >
+                重置
               </Button>
             </Space>
           </div>
@@ -100,6 +114,11 @@ const UserCRUD = () => {
       <ProTable<UserInfo>
         actionRef={actionRef}
         columns={columns}
+        toolBarRender={() => [
+          <Button key="1" type="primary" onClick={() => {}}>
+            新增
+          </Button>,
+        ]}
         request={async (params) => {
           const { current, pageSize } = params;
           const queryParams: Record<string, any> = {

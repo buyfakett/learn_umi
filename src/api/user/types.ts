@@ -19,6 +19,7 @@ export interface UserListParams {
   page?: number;
   page_size?: number;
   username?: string;
+  email?: string;
 }
 
 export interface UserInfo {
